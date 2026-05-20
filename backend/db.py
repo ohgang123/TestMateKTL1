@@ -9,8 +9,13 @@ from sqlalchemy import (Column, DateTime, ForeignKey, Integer, String, Text,
                         create_engine)
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-DB_PATH = Path(os.getenv("KTL_DB_PATH", Path(__file__).resolve().parent / "data" / "ktl.db"))
-DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+DEFAULT_DB_PATH = Path(__file__).resolve().parent / "data" / "ktl.db"
+DB_PATH = Path(os.getenv("KTL_DB_PATH", DEFAULT_DB_PATH))
+try:
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+except PermissionError:
+    DB_PATH = DEFAULT_DB_PATH
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 engine = create_engine(f"sqlite:///{DB_PATH}", future=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False, future=True)
