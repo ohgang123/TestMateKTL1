@@ -9,9 +9,3 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
-      - key: KTL_DB_PATH
-        value: /var/data/ktl.db
-    disk:
-      name: ktl-data
-      mountPath: /var/data
-      sizeGB: 1

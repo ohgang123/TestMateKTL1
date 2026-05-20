@@ -28,10 +28,9 @@ If you create a Render Web Service manually:
 - Start Command: `bash ./start.sh`
 - Environment Variables:
   - `PYTHON_VERSION=3.11.9`
-  - `KTL_DB_PATH=/var/data/ktl.db`
 
-Attach a persistent disk mounted at `/var/data` so SQLite data survives
-redeploys.
+If you attach a paid persistent disk, set `KTL_DB_PATH` to the mounted path,
+for example `/var/data/ktl.db`.
 
 ## URLs
 
@@ -48,4 +47,5 @@ After deployment:
 
 - The original raw training CSV is not required for deployment because the
   trained model artifacts are already in `backend/artifacts/`.
-- Runtime SQLite data is stored outside the repository with `KTL_DB_PATH`.
+- Runtime SQLite data is stored in `backend/data/ktl.db` by default. Set
+  `KTL_DB_PATH` only when a writable persistent disk is attached.

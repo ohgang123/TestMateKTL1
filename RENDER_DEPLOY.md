@@ -16,7 +16,7 @@ The service uses:
 - Build command: `pip install -r requirements.txt`
 - Start command: `bash ./start.sh`
 - Health check: `/api/dashboard`
-- Persistent SQLite path: `/var/data/ktl.db`
+- SQLite path: `backend/data/ktl.db` by default
 
 ## Deploy Manually
 
@@ -27,10 +27,9 @@ If you create a Web Service manually, use these settings:
 - Start Command: `bash ./start.sh`
 - Environment Variables:
   - `PYTHON_VERSION=3.11.9`
-  - `KTL_DB_PATH=/var/data/ktl.db`
 
-Attach a persistent disk mounted at `/var/data` if you want submitted
-applications to survive redeploys.
+Attach a persistent disk mounted at `/var/data` only if you want submitted
+applications to survive redeploys. If you do, add `KTL_DB_PATH=/var/data/ktl.db`.
 
 ## Notes
 
